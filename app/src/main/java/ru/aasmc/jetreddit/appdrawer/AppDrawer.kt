@@ -3,21 +3,24 @@ package ru.aasmc.jetreddit.appdrawer
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import ru.aasmc.jetreddit.R
 import ru.aasmc.jetreddit.theme.JetRedditThemeSettings
 
@@ -49,13 +52,79 @@ fun AppDrawer(
 private fun AppDrawerHeader(
 
 ) {
-
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            imageVector = Icons.Filled.AccountCircle,
+            contentDescription = stringResource(id = R.string.account),
+            colorFilter = ColorFilter.tint(Color.LightGray),
+            modifier = Modifier
+                .padding(16.dp)
+                .size(50.dp),
+            contentScale = ContentScale.Fit,
+            alignment = Alignment.Center
+        )
+        Text(
+            text = stringResource(id = R.string.default_username),
+            color = MaterialTheme.colors.primaryVariant
+        )
+        ProfileInfo()
+    }
+    Divider(
+        color = MaterialTheme.colors.onSurface.copy(alpha = .2f),
+        modifier = Modifier.padding(
+            start = 16.dp,
+            end = 16.dp,
+            top = 16.dp
+        )
+    )
 }
 
 
 @Composable
-private fun ProfileInfo() {
+private fun ProfileInfo(
+    modifier: Modifier = Modifier
+) {
+    ConstraintLayout(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp)
+    ) {
+        val (karmaItem, divider, ageItem)
+                = createRefs()
 
+        val colors = MaterialTheme.colors
+        ProfileInfoItem(
+            iconAsset = Icons.Filled.Star,
+            amountResourceId = R.string.default_karma_amount,
+            textResourceId = R.string.karma,
+            modifier = modifier.constrainAs(karmaItem) {
+                centerVerticallyTo(parent)
+                start.linkTo(parent.start)
+            }
+        )
+        Divider(
+            modifier = modifier
+                .width(1.dp)
+                .constrainAs(divider) {
+                    centerVerticallyTo(karmaItem)
+                    centerHorizontallyTo(parent)
+                    height = Dimension.fillToConstraints
+                },
+            color = colors.onSurface.copy(alpha = .2f)
+        )
+        ProfileInfoItem(
+            iconAsset = Icons.Filled.ShoppingCart,
+            amountResourceId = R.string.default_reddit_age_amount,
+            textResourceId = R.string.reddit_age,
+            modifier = modifier.constrainAs(ageItem) {
+                start.linkTo(divider.end)
+                centerVerticallyTo(parent)
+            }
+        )
+    }
 }
 
 @Composable
@@ -65,7 +134,51 @@ private fun ProfileInfoItem(
     textResourceId: Int,
     modifier: Modifier
 ) {
+    val colors = MaterialTheme.colors
 
+    ConstraintLayout(modifier = modifier) {
+        val (iconRef, amountRef, titleRef)
+                = createRefs()
+
+        val itemModifier = Modifier
+        Icon(
+            contentDescription = stringResource(id = textResourceId),
+            imageVector = iconAsset,
+            tint = Color.Blue,
+            modifier = itemModifier
+                .constrainAs(iconRef) {
+                    centerVerticallyTo(parent)
+                    start.linkTo(parent.start)
+                }
+                .padding(start = 16.dp)
+        )
+
+        Text(
+            text = stringResource(id = amountResourceId),
+            color = colors.primaryVariant,
+            fontSize = 10.sp,
+            modifier = itemModifier
+                .padding(start = 8.dp)
+                .constrainAs(amountRef) {
+                    top.linkTo(iconRef.top)
+                    start.linkTo(iconRef.end)
+                    bottom.linkTo(titleRef.top)
+                }
+        )
+
+        Text(
+            text = stringResource(id = textResourceId),
+            color = Color.Gray,
+            fontSize = 10.sp,
+            modifier = itemModifier
+                .padding(start = 8.dp)
+                .constrainAs(titleRef) {
+                    top.linkTo(amountRef.bottom)
+                    start.linkTo(iconRef.end)
+                    bottom.linkTo(iconRef.bottom)
+                }
+        )
+    }
 }
 
 /**
