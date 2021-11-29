@@ -1,4 +1,7 @@
 package ru.aasmc.jetreddit.models
 
-class SubredditModel {
-}
+data class SubredditModel(
+    val name: String,
+    val members: String,
+    val description: String
+)
