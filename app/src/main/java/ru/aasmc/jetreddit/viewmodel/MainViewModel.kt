@@ -1,4 +1,6 @@
 package ru.aasmc.jetreddit.viewmodel
 
-class MainViewModel {
+import androidx.lifecycle.ViewModel
+
+class MainViewModel: ViewModel() {
 }
