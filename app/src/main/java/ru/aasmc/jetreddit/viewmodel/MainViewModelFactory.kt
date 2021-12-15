@@ -5,10 +5,12 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
+import ru.aasmc.jetreddit.data.repository.Repository
 
 class MainViewModelFactory(
     owner: SavedStateRegistryOwner,
-    private val defaultArgs: Bundle? = null
+    private val repository: Repository,
+    defaultArgs: Bundle? = null
 ) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
 
     override fun <T : ViewModel?> create(
@@ -16,7 +18,7 @@ class MainViewModelFactory(
         modelClass: Class<T>,
         handle: SavedStateHandle
     ): T {
-        return MainViewModel() as T
+        return MainViewModel(repository = repository) as T
     }
 
 }

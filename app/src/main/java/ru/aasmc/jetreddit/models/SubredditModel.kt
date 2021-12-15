@@ -1,7 +1,17 @@
 package ru.aasmc.jetreddit.models
 
+import androidx.annotation.StringRes
+import ru.aasmc.jetreddit.R
+
 data class SubredditModel(
-    val name: String,
-    val members: String,
-    val description: String
-)
+    @StringRes val nameStringRes: Int,
+    @StringRes val membersStringRes: Int,
+    @StringRes val descriptionStringRes: Int
+) {
+    companion object {
+        val DEFAULT_SUBREDDIT =
+            SubredditModel(
+                R.string.android, R.string.members_400k, R.string.welcome_to_android
+            )
+    }
+}

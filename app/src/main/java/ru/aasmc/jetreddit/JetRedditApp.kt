@@ -21,18 +21,19 @@ import ru.aasmc.jetreddit.routing.Screen
 import ru.aasmc.jetreddit.screens.AddScreen
 import ru.aasmc.jetreddit.screens.HomeScreen
 import ru.aasmc.jetreddit.screens.MyProfileScreen
-import ru.aasmc.jetreddit.screens.SubredditScreen
+import ru.aasmc.jetreddit.screens.SubredditsScreen
 import ru.aasmc.jetreddit.theme.JetRedditTheme
+import ru.aasmc.jetreddit.viewmodel.MainViewModel
 
 @Composable
-fun JetRedditApp() {
+fun JetRedditApp(viewModel: MainViewModel) {
     JetRedditTheme {
-        AppContent()
+        AppContent(viewModel)
     }
 }
 
 @Composable
-private fun AppContent() {
+private fun AppContent(viewModel: MainViewModel) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     val coroutineScope: CoroutineScope = rememberCoroutineScope()
 
@@ -51,7 +52,8 @@ private fun AppContent() {
             content = {
                 MainScreenContainer(
                     modifier = Modifier.padding(bottom = 56.dp),
-                    screenState = screenState
+                    screenState = screenState,
+                    viewModel = viewModel
                 )
             }
         )
@@ -104,17 +106,18 @@ fun TopAppBar(
 @Composable
 private fun MainScreenContainer(
     modifier: Modifier = Modifier,
-    screenState: MutableState<Screen>
+    screenState: MutableState<Screen>,
+    viewModel: MainViewModel
 ) {
     Surface(
         modifier = modifier,
         color = MaterialTheme.colors.background
     ) {
         when (screenState.value) {
-            Screen.Home -> HomeScreen()
+            Screen.Home -> HomeScreen(viewModel)
             Screen.MyProfile -> MyProfileScreen()
             Screen.NewPost -> AddScreen()
-            Screen.Subscriptions -> SubredditScreen()
+            Screen.Subscriptions -> SubredditsScreen()
         }
     }
 
