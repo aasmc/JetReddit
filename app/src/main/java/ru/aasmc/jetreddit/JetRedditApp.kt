@@ -1,7 +1,7 @@
 package ru.aasmc.jetreddit
 
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.background
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -22,6 +22,7 @@ import ru.aasmc.jetreddit.screens.*
 import ru.aasmc.jetreddit.theme.JetRedditTheme
 import ru.aasmc.jetreddit.viewmodel.MainViewModel
 
+@ExperimentalAnimationApi
 @Composable
 fun JetRedditApp(viewModel: MainViewModel) {
     JetRedditTheme {
@@ -29,6 +30,7 @@ fun JetRedditApp(viewModel: MainViewModel) {
     }
 }
 
+@ExperimentalAnimationApi
 @Composable
 private fun AppContent(viewModel: MainViewModel) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
@@ -100,6 +102,7 @@ fun TopAppBar(
 
 }
 
+@ExperimentalAnimationApi
 @Composable
 private fun MainScreenContainer(
     modifier: Modifier = Modifier,

@@ -67,4 +67,5 @@
   <string name="raywenderlich_com">r/raywenderlich.com</string>
     <string name="plus_icon">Plus icon</string>
     <string name="join">Join</string>
+    <string name="join_community">You have joind this community</string>
 </resources>
