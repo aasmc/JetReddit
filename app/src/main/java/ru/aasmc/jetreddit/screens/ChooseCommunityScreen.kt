@@ -22,6 +22,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.aasmc.jetreddit.R
+import ru.aasmc.jetreddit.routing.BackButtonAction
 import ru.aasmc.jetreddit.routing.JetRedditRouter
 import ru.aasmc.jetreddit.viewmodel.MainViewModel
 
@@ -79,6 +80,9 @@ fun ChooseCommunityScreen(viewModel: MainViewModel, modifier: Modifier = Modifie
             )
         )
         SearchedCommunities(communities = communities, viewModel = viewModel, modifier)
+    }
+    BackButtonAction {
+        JetRedditRouter.goBack()
     }
 }
 
