@@ -84,7 +84,7 @@ private fun AppDrawerHeader(
 
 
 @Composable
-private fun ProfileInfo(
+fun ProfileInfo(
     modifier: Modifier = Modifier
 ) {
     ConstraintLayout(
@@ -269,14 +269,14 @@ private fun AppDrawerFooter(
         val colors = MaterialTheme.colors
         val (settingsImage, settingsText, darkModeButton)
                 = createRefs()
-        Icon(
+        Image(
             modifier = modifier.constrainAs(settingsImage) {
                 start.linkTo(parent.start)
                 bottom.linkTo(parent.bottom)
             },
             imageVector = Icons.Default.Settings,
             contentDescription = stringResource(id = R.string.settings),
-            tint = colors.primaryVariant
+            colorFilter = ColorFilter.tint(colors.primaryVariant)
         )
         Text(
             fontSize = 10.sp,
@@ -291,8 +291,8 @@ private fun AppDrawerFooter(
                 }
         )
 
-        Icon(
-            imageVector = ImageVector.vectorResource(id = R.drawable.ic_moon),
+        Image(
+            imageVector = Icons.Default.DarkMode,
             contentDescription = stringResource(id = R.string.change_theme),
             modifier = modifier
                 .clickable(onClick = { changeTheme() })
@@ -300,7 +300,7 @@ private fun AppDrawerFooter(
                     end.linkTo(parent.end)
                     bottom.linkTo(settingsImage.bottom)
                 },
-            tint = colors.primaryVariant
+            colorFilter = ColorFilter.tint(colors.primaryVariant)
         )
     }
 }

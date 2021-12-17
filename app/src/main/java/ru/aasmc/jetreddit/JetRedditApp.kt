@@ -18,10 +18,7 @@ import kotlinx.coroutines.launch
 import ru.aasmc.jetreddit.appdrawer.AppDrawer
 import ru.aasmc.jetreddit.routing.JetRedditRouter
 import ru.aasmc.jetreddit.routing.Screen
-import ru.aasmc.jetreddit.screens.AddScreen
-import ru.aasmc.jetreddit.screens.HomeScreen
-import ru.aasmc.jetreddit.screens.MyProfileScreen
-import ru.aasmc.jetreddit.screens.SubredditsScreen
+import ru.aasmc.jetreddit.screens.*
 import ru.aasmc.jetreddit.theme.JetRedditTheme
 import ru.aasmc.jetreddit.viewmodel.MainViewModel
 
@@ -115,9 +112,10 @@ private fun MainScreenContainer(
     ) {
         when (screenState.value) {
             Screen.Home -> HomeScreen(viewModel)
-            Screen.MyProfile -> MyProfileScreen()
-            Screen.NewPost -> AddScreen()
+            Screen.MyProfile -> MyProfileScreen(viewModel)
+            Screen.NewPost -> AddScreen(viewModel)
             Screen.Subscriptions -> SubredditsScreen()
+            Screen.ChooseCommunity -> ChooseCommunityScreen(viewModel)
         }
     }
 

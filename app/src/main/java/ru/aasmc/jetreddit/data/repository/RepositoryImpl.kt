@@ -15,6 +15,8 @@ class RepositoryImpl(
     private val postDao: PostDao, private val mapper: DbMapper
 ) : Repository {
 
+    private var searchedText = ""
+
     private val allPostsLiveData: MutableLiveData<List<PostModel>> by lazy {
         MutableLiveData<List<PostModel>>()
     }
@@ -48,6 +50,13 @@ class RepositoryImpl(
     override fun getAllPosts(): LiveData<List<PostModel>> = allPostsLiveData
 
     override fun getAllOwnedPosts(): LiveData<List<PostModel>> = ownedPostsLiveData
+    override fun getAllSubreddits(searchedText: String): List<String> {
+        this.searchedText = searchedText
+        if (searchedText.isNotEmpty()) {
+            return postDao.getAllSubreddits().filter { it.contains(searchedText) }
+        }
+        return postDao.getAllSubreddits()
+    }
 
     override fun insert(postModel: PostModel) {
         postDao.insert(mapper.mapDbPost(postModel))
