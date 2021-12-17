@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JetReddit"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".screens.ChatActivity"></activity>
 
         <!-- Main Activity -->
         <activity
