@@ -65,4 +65,6 @@
   <string name="subreddit_icon">Subreddit Icon</string>
   <string name="community_icon">Community Icon</string>
   <string name="raywenderlich_com">r/raywenderlich.com</string>
+    <string name="plus_icon">Plus icon</string>
+    <string name="join">Join</string>
 </resources>
