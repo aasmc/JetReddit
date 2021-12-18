@@ -1,13 +1,19 @@
 # Jet Reddit Educational App
 
 This app is based on chapters 9 - 13 of the book "Jetpack Compose by tutorials"
+Its focus is on building a layout similar to the one used in the Reddit app only using Jetpack Compose.
 
 ## Functionality
-// TODO
-## Architecture
-// TODO
-## Stack
-// TODO
+The functionality of the application is limited to only showing the UI elements build
+with Jetpack Compose. 
+
+It has an AppDrawer and several screens:
+- HomeScreen
+- AddPostScreen
+- SubredditScreen
+
+It can switch between light and dark themes. 
+
 ## Copyright
 ```text
   ~ Copyright (c) 2019 Razeware LLC
